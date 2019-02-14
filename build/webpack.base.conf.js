@@ -2,6 +2,25 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+const postCssLoader = {
+    loader: 'postcss-loader',
+    options: {
+        plugins: [require('autoprefixer')]
+    }
+}
+
+const lessLoader =  {
+    loader: 'less-loader',
+    options: { javascriptEnabled: true}
+}
+
+const cssLoader = (options) => {
+    return {
+        loader: 'css-loader',
+        options: {...options}
+    }
+}
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -12,7 +31,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', cssLoader({ importLoaders: 1}), postCssLoader]
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', cssLoader({ importLoaders: 2}), postCssLoader, lessLoader]
             },
             {
                 test: /\.js$/,
@@ -27,7 +50,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './public/index.html'
         }),
         new CleanWebpackPlugin(['dist'])
     ]

@@ -7,6 +7,7 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -14,6 +15,9 @@
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
@@ -25,7 +29,18 @@
     "build": "webpack --config ./build/webpack.prod.conf.js"
   },
   "dependencies": {
+    "antd": "^3.13.2",
+    "babel-plugin-import": "^1.11.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
-  }
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "Firefox ESR",
+    "> 1%",
+    "ie >= 8",
+    "iOS >= 8",
+    "Android >= 4"
+  ]
 }
