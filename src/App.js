@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import AppLayout from './layout/app'
 
 class App extends Component {

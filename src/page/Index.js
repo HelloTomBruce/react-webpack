@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
 import Nav from '../component/nav'
 import '../less/index.less'
 import '../less/index.css'
-
 class Index extends Component {
     render () {
         return (
