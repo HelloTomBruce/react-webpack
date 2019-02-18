@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import AppLayout from './layout/app'
+import Count from './component/count'
 
 class App extends Component {
     constructor(props) {
@@ -9,10 +11,13 @@ class App extends Component {
         return (
             <div>
                 <h1>hello react-webpack</h1>
+                <Count/>
                 <AppLayout/>
             </div>
         )
     }
 }
 
-export default App
+const mapStateToProps = state => ({})
+
+export default connect(mapStateToProps)(App)

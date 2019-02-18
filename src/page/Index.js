@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Nav from '../component/nav'
-import '../less/index.less'
-import '../less/index.css'
+import '../page-less/index.less'
+import '../page-less/index.css'
 class Index extends Component {
     render () {
         return (
