@@ -1,6 +1,8 @@
+import { ADD, DEC } from '../action-type/count'
+
 export const addCount = (num) => {
     return {
-        type: 'ADD',
+        type: ADD,
         payload: {
             num
         }
@@ -8,7 +10,7 @@ export const addCount = (num) => {
 }
 
 export const decCount = num => ({
-    type: 'DEC',
+    type: DEC,
     payload: {
         num
     }

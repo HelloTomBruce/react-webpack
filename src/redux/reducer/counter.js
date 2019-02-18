@@ -1,15 +1,17 @@
+import { ADD, DEC } from '../action-type/count'
+
 const initState = {
     num: 1
 }
 
 const CountReducer = (state = initState, action) => {
     switch(action.type) {
-        case 'ADD':
+        case ADD:
             return {
                 ...state,
                 num: state.num + action.payload.num
             }
-        case 'DEC':
+        case DEC:
             return {
                 ...state,
                 num: state.num - action.payload.num
