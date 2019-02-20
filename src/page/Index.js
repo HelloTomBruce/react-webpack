@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Nav from '../component/nav'
 import '../page-less/index.less'
 import '../page-less/index.css'
 class Index extends Component {
@@ -7,7 +6,6 @@ class Index extends Component {
         return (
             <div>
                 <h1>home page</h1>
-                <Nav/>
             </div>
         )
     }
