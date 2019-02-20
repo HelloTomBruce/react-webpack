@@ -131,8 +131,8 @@ class NoticeBoard extends Component {
     }
 
     render () {
-        let noticeList = this.state.urlList.map(item => {
-            return <Notice url={item.url} host={item.host} key={item.host} title={item.title} encodeType={item.encodeType} home={item.home}/>
+        let noticeList = this.state.urlList.map((item, index) => {
+            return <Notice url={item.url} host={item.host} key={index} title={item.title} encodeType={item.encodeType} home={item.home}/>
         })
 
         return (

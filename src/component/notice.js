@@ -21,15 +21,38 @@ class Notice extends Component {
                 '#67b4b0'
             ]
         }
+        this.showNotification = this.showNotification.bind(this)
+        this.getNoticeData = this.getNoticeData.bind(this)
     }
 
     componentWillMount () {
+        this.getNoticeData()
+        setInterval(() => {
+            this.getNoticeData()
+        }, 1000 * 60 * 30)
+    }
+
+    getNoticeData () {
         let url =`http://localhost:9000/getNotice?url=${encodeURIComponent(this.props.url)}&encodeType=${this.props.encodeType}`
         axios.get(url).then(res => {
             this.setState({
-                notice: res.data
+                notice: res.data.list
             })
+            if (+res.data.notice) {
+                this.showNotification()
+            }
         })
+    }
+
+    showNotification () {
+        Notification.requestPermission((status) => {
+            let title = '找到关于调剂的信息啦'
+            let option = {
+                body: `来自${this.props.title}的一则公告中包含调剂信息`,
+                icon: 'https://picsum.photos/100/100'
+            }
+            new Notification(title, option)
+        });
     }
 
     render () {
