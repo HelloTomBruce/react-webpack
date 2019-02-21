@@ -79,7 +79,7 @@ class NoticeBoard extends Component {
                 },
                 {
                     url: 'http://yjs.hznu.edu.cn/tkyjszs/',
-                    host: 'http://yjs.hznu.edu.cn/tkyjszs',
+                    host: 'http://yjs.hznu.edu.cn/',
                     title: '杭州师范大学',
                     encodeType: 'utf-8',
                     home: 'http://yjs.hznu.edu.cn'
