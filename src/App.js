@@ -10,6 +10,7 @@ import ContextComponent from './component/context/index'
 import Refs from './component/refs'
 import Fragment from './component/fragments'
 import Dialog from './component/dialogExample'
+import AntDialog from './component/antDialog'
 import './page-less/index.css'
 
 class App extends Component {
@@ -48,7 +49,8 @@ class App extends Component {
                 </ul>
                 <div onClick={this.dialogClick}>
                     <Dialog/>
-                </div> */}
+                </div>
+                <AntDialog/> */}
                 <h1 className="page-title">招生公告</h1>
                 <NoticeBoard/>
             </div>
