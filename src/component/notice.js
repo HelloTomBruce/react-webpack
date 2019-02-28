@@ -33,7 +33,9 @@ class Notice extends Component {
     }
 
     getNoticeData () {
-        let url =`http://localhost:9000/getNotice?url=${encodeURIComponent(this.props.url)}&encodeType=${this.props.encodeType}`
+        let url =`http://localhost:9000/getNotice?url=${encodeURIComponent(this.props.url)}` +
+            `&encodeType=${this.props.encodeType}` +
+            `&type=${this.props.type}`
         axios.get(url).then(res => {
             this.setState({
                 notice: res.data.list
@@ -60,6 +62,7 @@ class Notice extends Component {
             return (
                 <a className="notice-one" key={index} href={this.props.host + item.href}>
                     {item.text}
+                    <span className='time'>{item.time}</span>
                 </a>
             )
         })
