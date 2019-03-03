@@ -193,6 +193,22 @@ export default {
             "encodeType": "utf-8",
             "home":  "http://yjsy.nenu.edu.cn",
             "type": "dbsf"
+        },
+        {
+            "url": "https://yjszs.ecnu.edu.cn/system/sszsxx_list.asp",
+            "host": "https://yjszs.ecnu.edu.cn/system/",
+            "title": "华东师范大学",
+            "encodeType": "gb2312",
+            "home":  "http://yjsy.nenu.edu.cn",
+            "type": "hdsf"
+        },
+        {
+            "url": "http://yjsc.shnu.edu.cn/17206/list.htm",
+            "host": "http://yjsc.shnu.edu.cn",
+            "title": "上海师范大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjsc.shnu.edu.cn",
+            "type": "shsf"
         }
     ]
 }   
