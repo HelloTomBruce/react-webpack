@@ -1,7 +1,7 @@
 export default {
     "list": [
         {
-            "url": "https://yz.chsi.com.cn/kyzx/yxzc",
+            "url": "https://yz.chsi.com.cn/kyzx/tjxx/",
             "host": "https://yz.chsi.com.cn",
             "selector": ".news-list li",
             "timeSelector": ".span-time",
@@ -169,6 +169,30 @@ export default {
             "encodeType": "utf-8",
             "home": "http://yjs.gnnu.cn",
             "type": "gnsf"
+        },
+        {
+            "url": "http://yjsy.tjnu.edu.cn/zsxx.htm",
+            "host": "http://yjsy.tjnu.edu.cn/",
+            "title": "天津师范大学",
+            "encodeType": "utf-8",
+            "home": "http://yjsy.tjnu.edu.cn/",
+            "type": "tjsf"
+        },
+        {
+            "url": "http://yjsy.hebtu.edu.cn/a/tzgg/index.html",
+            "host": "",
+            "title": "河北师范大学",
+            "encodeType": "utf-8",
+            "home": "http://yjsy.hebtu.edu.cn",
+            "type": "hbsf"
+        },
+        {
+            "url": "http://yjsy.nenu.edu.cn/tzgg.htm",
+            "host": "http://yjsy.nenu.edu.cn",
+            "title": "东北师范大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjsy.nenu.edu.cn",
+            "type": "dbsf"
         }
     ]
 }   
