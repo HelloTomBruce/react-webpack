@@ -195,20 +195,76 @@ export default {
             "type": "dbsf"
         },
         {
-            "url": "https://yjszs.ecnu.edu.cn/system/sszsxx_list.asp",
-            "host": "https://yjszs.ecnu.edu.cn/system/",
-            "title": "华东师范大学",
-            "encodeType": "gb2312",
-            "home":  "http://yjsy.nenu.edu.cn",
-            "type": "hdsf"
-        },
-        {
             "url": "http://yjsc.shnu.edu.cn/17206/list.htm",
             "host": "http://yjsc.shnu.edu.cn",
             "title": "上海师范大学",
             "encodeType": "utf-8",
             "home":  "http://yjsc.shnu.edu.cn",
             "type": "shsf"
+        },
+        {
+            "url": "http://grad.beihua.edu.cn/index/zxzx.htm",
+            "host": "http://grad.beihua.edu.cn",
+            "title": "北华大学",
+            "encodeType": "utf-8",
+            "home":  "http://grad.beihua.edu.cn/",
+            "type": "bhdx"
+        },
+        {
+            "url": "http://yjs.qqhru.edu.cn/zsks.htm",
+            "host": "http://yjs.qqhru.edu.cn/",
+            "title": "齐齐哈尔大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjs.qqhru.edu.cn",
+            "type": "qqhe"
+        },
+        {
+            "url": "http://yjs.jmsu.edu.cn/list.jsp?urltype=tree.TreeTempUrl&wbtreeid=1081",
+            "host": "http://yjs.jmsu.edu.cn/",
+            "title": "佳木斯大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjs.jmsu.edu.cn/",
+            "type": "jms"
+        },
+        {
+            "url": "http://grad.aqnu.edu.cn/zxdt.htm",
+            "host": "http://grad.aqnu.edu.cn",
+            "title": "安庆师范大学",
+            "encodeType": "utf-8",
+            "home":  "http://grad.aqnu.edu.cn",
+            "type": "aqsf"
+        },
+        {
+            "url": "http://yjsy.ecut.edu.cn/427/list.htm",
+            "host": "http://yjsy.ecut.edu.cn",
+            "title": "东华理工大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjsy.ecut.edu.cn",
+            "type": "dhlg"
+        },
+        {
+            "url": "http://yjs.qfnu.edu.cn/zsgz/sszs.htm",
+            "host": "http://yjsy.ecut.edu.cn",
+            "title": "曲阜师范大学",
+            "encodeType": "utf-8",
+            "home":  "http://yjsy.ecut.edu.cn",
+            "type": "qfsf"
+        },
+        {
+            "url": "http://www.grad.ldu.edu.cn/index.htm",
+            "host": "http://www.grad.ldu.edu.cn",
+            "title": "鲁东大学",
+            "encodeType": "utf-8",
+            "home":  "http://www.grad.ldu.edu.cn",
+            "type": "lddx"
+        },
+        {
+            "url": "http://adge.hpu.edu.cn/channels/4148.html",
+            "host": "",
+            "title": "河南理工大学",
+            "encodeType": "gb2312",
+            "home":  "http://adge.hpu.edu.cn",
+            "type": "hnlg"
         }
     ]
 }   
