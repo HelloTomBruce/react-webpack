@@ -53,6 +53,7 @@ class App extends Component {
                 <AntDialog/> */}
                 <h1 className="page-title">招生公告</h1>
                 <NoticeBoard/>
+                {/* <AppLayout/> */}
             </div>
         )
     }
