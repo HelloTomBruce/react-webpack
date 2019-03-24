@@ -37,7 +37,7 @@
     "start": "webpack-dev-server --open --inline --content-base . --history-api-fallback --config ./build/webpack.dev.conf.js",
     "build": "webpack --config ./build/webpack.prod.conf.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "dependencies": {
     "antd": "^3.13.2",
