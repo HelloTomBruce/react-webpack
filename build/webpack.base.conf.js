@@ -36,7 +36,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: '[name].[hash].js',
-        path: path.join(__dirname, '/dist')
+        path: path.join(__dirname, '../dist')
     },
     module: {
         rules: [

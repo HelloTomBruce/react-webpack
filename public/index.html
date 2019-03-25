@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8"/>
         <title>react-webpack</title>
-        <script type="text/javascript" src="//at.alicdn.com/t/font_519743_7l0qfl2ru3c.js"></script>
+        <script type="text/javascript" src="https://at.alicdn.com/t/font_519743_7l0qfl2ru3c.js"></script>
     </head>
     <body>
         <div id="root"></div>
         <div id='dialog-root'></div>
     </body>
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-        <script type="text/javascript" src="/<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+        <script type="text/javascript" src="./<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %>
 </html>
