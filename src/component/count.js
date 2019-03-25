@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, Input } from 'antd'
-import { addCount, decCount } from '../redux/action/count'
-import '../component-less/count.less'
+import { addCount, decCount } from '@/redux/action/count'
+import '@/component-less/count.less'
 
 const mapStateToProps = state => ({
     num: state.count.num

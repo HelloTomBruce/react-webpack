@@ -1,6 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const devMode = process.env.NODE_ENV !== 'production'
 
 const postCssLoader = {
     loader: 'postcss-loader',
@@ -21,6 +23,15 @@ const cssLoader = (options) => {
     }
 }
 
+const MiniCssExtractPluginLoader = (options) => {
+    return {
+        loader: MiniCssExtractPlugin.loader,
+        options: Object.assign({
+            publicPath: path.resolve(__dirname, '/src/page/less')
+        }, options)
+    }
+}
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -31,11 +42,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', cssLoader({ importLoaders: 1}), postCssLoader]
+                use: [devMode ? 'style-loader' : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 1}), postCssLoader]
             },
             {
                 test: /\.less$/,
-                use: ['style-loader', cssLoader({ importLoaders: 2}), postCssLoader, lessLoader]
+                use: [devMode ? 'style-loader' : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 2}), postCssLoader, lessLoader]
             },
             {
                 test: /\.js$/,
@@ -52,11 +63,20 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, '../src')
+        }
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
             inject: false
         }),
-        new CleanWebpackPlugin(['dist'])
+        new CleanWebpackPlugin(['dist']),
+        new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        })
     ]
 }
