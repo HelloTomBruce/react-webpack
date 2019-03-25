@@ -6,5 +6,6 @@ import Prompt from './prompt'
 import Recursive from './Recursive'
 import SideBar from './sidebar'
 import Nesting from './nesting'
+import ModalSwitch from './modalSwitch'
 
-export default Nesting
+export default ModalSwitch
