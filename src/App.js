@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AppLayout from './layout/app'
-import Basic from './component/router/basic'
-import Nested from './component/router/nested'
+import RouterDemo from './component/router/index'
 import './page-less/index.css'
 
 class App extends Component {
@@ -13,7 +12,7 @@ class App extends Component {
     render () {
         return (
             <div>
-                <Nested/>
+                <RouterDemo/>
             </div>
         )
     }
