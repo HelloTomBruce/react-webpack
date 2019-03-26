@@ -4,7 +4,7 @@ require('dotenv').config()
 
 module.exports = merge(baseConfig, {
     mode: 'development',
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: './dist',
         port: process.env.PORT,
