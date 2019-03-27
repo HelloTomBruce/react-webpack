@@ -9,6 +9,6 @@ module.exports = merge(baseConfig, {
         new BundleAnalyzerPlugin()
     ],
     optimization: {
-        
+        minimize: true
     }
 })

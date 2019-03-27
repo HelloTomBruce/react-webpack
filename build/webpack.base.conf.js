@@ -1,7 +1,9 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 const postCssLoader = {
@@ -52,10 +54,11 @@ module.exports = {
                 test: /\.js$/,
                 use: [
                     {
-                        loader: 'babel-loader'
+                        loader: 'babel-loader?cacheDirectory'
                     }
                 ],
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, '../src')
             },
             {
                 test: /\.json$/,
@@ -64,9 +67,11 @@ module.exports = {
         ]
     },
     resolve: {
+        modules: ['node_modules'],
         alias: {
             '@': path.resolve(__dirname, '../src')
-        }
+        },
+        extensions: ['.js']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -77,6 +82,13 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: require('../dist/react.manifest.json')
+        }),
+        new HtmlIncludeAssetsPlugin({
+            assets: ['react.dll.js'],
+            append: false
         })
     ]
 }
