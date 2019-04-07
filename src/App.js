@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
 import AppLayout from './layout/app'
 import RouterDemo from './component/router/index'
 import SvgIcon from '@/component/svgIcon'
@@ -23,4 +24,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({})
 
-export default connect(mapStateToProps)(App)
+export default hot(module)(connect(mapStateToProps)(App))

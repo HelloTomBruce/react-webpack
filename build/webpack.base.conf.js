@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
@@ -35,7 +35,9 @@ const MiniCssExtractPluginLoader = (options) => {
 }
 
 module.exports = {
-    entry: './src/index.js',
+    entry: [
+        './src/index.js'
+    ],
     output: {
         filename: '[name].[hash].js',
         path: path.join(__dirname, '../dist')
@@ -78,7 +80,6 @@ module.exports = {
             template: './public/index.html',
             inject: false
         }),
-        new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
