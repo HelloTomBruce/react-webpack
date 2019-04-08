@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from "react"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 function ParamsExample() {
   return (
@@ -29,13 +29,10 @@ function ParamsExample() {
               * "/order/desc" - matched
               * "/order/foo"  - not matched
         */}
-        <Route
-          path="/order/:type(asc|desc)"
-          component={ComponentWithRegex}
-        />
+        <Route path="/order/:type(asc|desc)" component={ComponentWithRegex} />
       </div>
     </Router>
-  );
+  )
 }
 
 function Child({ match }) {
@@ -43,7 +40,7 @@ function Child({ match }) {
     <div>
       <h3>ID: {match.params.id}</h3>
     </div>
-  );
+  )
 }
 
 function ComponentWithRegex({ match }) {
@@ -51,7 +48,7 @@ function ComponentWithRegex({ match }) {
     <div>
       <h3>Only asc/desc are allowed: {match.params.type}</h3>
     </div>
-  );
+  )
 }
 
-export default ParamsExample;
+export default ParamsExample

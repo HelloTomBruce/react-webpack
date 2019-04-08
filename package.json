@@ -14,6 +14,7 @@
     "@storybook/addons": "^5.0.3",
     "@storybook/react": "^5.0.3",
     "autoprefixer": "^9.4.7",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -22,14 +23,21 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "dotenv": "^7.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-json": "^1.4.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^3.0.1",
     "html-webpack-include-assets-plugin": "^1.0.7",
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.5.0",
     "postcss-loader": "^3.0.0",
+    "pre-commit": "^1.2.2",
     "raw-loader": "^1.0.0",
     "react-hot-loader": "^4.8.2",
     "style-loader": "^0.23.1",
@@ -45,7 +53,9 @@
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.conf.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o .out",
-    "build-dll": "webpack --config ./build/webpack_dll.config.js --mode production"
+    "build-dll": "webpack --config ./build/webpack_dll.config.js --mode production",
+    "eslint": "eslint src/**/*.js",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "antd": "^3.13.2",
@@ -65,5 +75,16 @@
     "ie >= 8",
     "iOS >= 8",
     "Android >= 4"
-  ]
+  ],
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.{css,json,md}": [
+      "git add"
+    ],
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
 }

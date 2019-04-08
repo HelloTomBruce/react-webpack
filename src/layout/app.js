@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom";
+import React, { Component } from "react"
+import { BrowserRouter as Router, Route, Link, Prompt } from "react-router-dom"
 
 function PreventingTransitionsExample() {
   return (
@@ -25,23 +25,23 @@ function PreventingTransitionsExample() {
         <Route path="/two/:id" render={() => <h3>Two id</h3>} />
       </div>
     </Router>
-  );
+  )
 }
 
 class Form extends Component {
   state = { isBlocking: false };
 
   render() {
-    let { isBlocking } = this.state;
+    let { isBlocking } = this.state
 
     return (
       <form
         onSubmit={event => {
-          event.preventDefault();
-          event.target.reset();
+          event.preventDefault()
+          event.target.reset()
           this.setState({
             isBlocking: false
-          });
+          })
         }}
       >
         <Prompt
@@ -63,7 +63,7 @@ class Form extends Component {
             onChange={event => {
               this.setState({
                 isBlocking: event.target.value.length > 0
-              });
+              })
             }}
           />
         </p>
@@ -72,8 +72,8 @@ class Form extends Component {
           <button>Submit to stop blocking</button>
         </p>
       </form>
-    );
+    )
   }
 }
 
-export default PreventingTransitionsExample;
+export default PreventingTransitionsExample

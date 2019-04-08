@@ -1,8 +1,8 @@
-import { GET_LIST } from '../action-type/list'
+import { GET_LIST } from "../action-type/list"
 
-export const getList = (url) => ({
-    type: GET_LIST,
-    payload: {
-        url
-    }
+export const getList = url => ({
+  type:    GET_LIST,
+  payload: {
+    url
+  }
 })

@@ -1,12 +1,10 @@
-import React from 'react'
-import { Button } from 'antd'
+import React from "react"
+import { Button } from "antd"
 
 class ToolBar extends React.Component {
-    render () {
-        return (
-            <Button onClick={this.props.changeTheme}>Change Theme</Button>
-        )
-    }
+  render() {
+    return <Button onClick={this.props.changeTheme}>Change Theme</Button>
+  }
 }
 
 export default ToolBar

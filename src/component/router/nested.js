@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from "react"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 function App() {
   return (
@@ -12,19 +12,19 @@ function App() {
         <Route path="/topics" component={Topics} />
       </div>
     </Router>
-  );
+  )
 }
 
 function Home() {
-  return <h2>Home</h2>;
+  return <h2>Home</h2>
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <h2>About</h2>
 }
 
 function Topic({ match }) {
-  return <h3>Requested Param: {match.params.id}</h3>;
+  return <h3>Requested Param: {match.params.id}</h3>
 }
 
 function Topics({ match }) {
@@ -48,7 +48,7 @@ function Topics({ match }) {
         render={() => <h3>Please select a topic.</h3>}
       />
     </div>
-  );
+  )
 }
 
 function Header() {
@@ -64,7 +64,7 @@ function Header() {
         <Link to="/topics">Topics</Link>
       </li>
     </ul>
-  );
+  )
 }
 
-export default App;
+export default App
