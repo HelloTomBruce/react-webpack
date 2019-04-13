@@ -82,7 +82,7 @@
       "git add"
     ],
     "*.js": [
-      "prettier --write",
+      "prettier --tab-width 4 --write",
       "eslint --fix",
       "git add"
     ]
