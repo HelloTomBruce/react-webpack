@@ -12,12 +12,12 @@ module.exports = {
         node: true
     },
     rules: {
-        indent: ["error", 4],
-        "space-before-function-paren": 1,
+        "space-before-function-paren": 0,
         "key-spacing": [
             2,
-            { beforeColon: false, mode: "script", align: "colon" }
-        ]
+            { beforeColon: false, mode: "strict", align: "value" }
+        ],
+        "react/prop-types": 0
     },
     globals: {
         // configure global variables avoid no-undef error

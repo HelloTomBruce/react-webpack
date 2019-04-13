@@ -1,16 +1,16 @@
-import axios from "axios"
+import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded"
+    "application/x-www-form-urlencoded";
 
 export const login = (username, password) => {
-  let url = "http://yapi.demo.qunar.com/mock/33880/music/login"
-  return axios.post(url, JSON.stringify({ username, password }))
-}
+    let url = "http://yapi.demo.qunar.com/mock/33880/music/login";
+    return axios.post(url, JSON.stringify({ username, password }));
+};
 
 export const setToken = token => {
-  window.document.localStorage.setItem("token", token)
-}
+    window.document.localStorage.setItem("token", token);
+};
 
-export const clearToken = token => {
-        window.document.localStorage.removeItem("token")
-}
+export const clearToken = () => {
+    window.document.localStorage.removeItem("token");
+};
