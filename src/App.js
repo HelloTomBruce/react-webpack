@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import HookExample from "@/component/hook";
+import HookExample from "@/component/hook/useReducer";
 import "./page-less/index.css";
 
 class App extends Component {
