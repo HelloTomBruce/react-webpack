@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import HookExample from "@/component/hook/useRef";
+import GraphqlExample from "@/component/graphql";
 import "./page-less/index.css";
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <HookExample />
+                <GraphqlExample />
             </div>
         );
     }
