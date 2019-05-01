@@ -1,12 +1,14 @@
-import { combineReducers } from "redux"
-import count from "./counter.js"
-import list from "./list.js"
-import login from "./login"
+import { combineReducers } from "redux";
+import count from "./counter.js";
+import list from "./list.js";
+import login from "./login";
+import error from "./error";
 
 const rootReducer = combineReducers({
-  count,
-  list,
-  login
-})
+    count,
+    list,
+    login,
+    error
+});
 
-export default rootReducer
+export default rootReducer;

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import HookExample from "@/component/hook/useRef";
-import "./page-less/index.css";
+import AppLayout from "@/layout/app";
+import ErrorTip from "@/component/ErrorTip";
+import "@/style/reset.less";
 
 class App extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <HookExample />
+                <ErrorTip />
+                <AppLayout />
             </div>
         );
     }
