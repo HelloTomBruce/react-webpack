@@ -1,35 +1,36 @@
 import { take, call, put, fork, cancel, cancelled } from "redux-saga/effects";
 import axios from "axios";
-
 import {
     LOGIN_REQUEST,
     LOGOUT,
     LOGIN_ERROR,
     LOGIN_SUCCESS
 } from "../action-type/login";
+import { SHOW_ERROR_TIP } from "../action-type/error";
+import CONFIG from "@/config";
 
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
 
-const login = (username, password) => {
-    let url = "http://yapi.demo.qunar.com/mock/33880/music/login";
-    return axios.post(url, JSON.stringify({ username, password }));
+const login = name => {
+    let url = `${CONFIG.API}/index/login`;
+    return axios.post(url, { name });
 };
 
 const setToken = token => {
-    window.document.localStorage.setItem("token", token);
+    window.localStorage.setItem("token", token);
 };
 
 const clearToken = () => {
-    window.document.localStorage.removeItem("token");
+    window.localStorage.removeItem("token");
 };
 
 function* watchLogin() {
     while (true) {
         const {
-            payload: { user, password }
+            payload: { name }
         } = yield take(LOGIN_REQUEST);
-        const task = yield fork(authorize, user, password);
+        const task = yield fork(authorize, name);
         const action = yield take([LOGOUT, LOGIN_ERROR]);
         if (action.type === LOGOUT) {
             yield cancel(task);
@@ -38,13 +39,11 @@ function* watchLogin() {
     }
 }
 
-function* authorize(user, password) {
+function* authorize(name) {
     try {
         const {
-            data: {
-                data: { token }
-            }
-        } = yield call(login, user, password);
+            data: { token }
+        } = yield call(login, name);
         yield put({
             type:    LOGIN_SUCCESS,
             payload: {
@@ -58,6 +57,12 @@ function* authorize(user, password) {
             type:    LOGIN_ERROR,
             payload: {
                 error
+            }
+        });
+        yield put({
+            type:    SHOW_ERROR_TIP,
+            payload: {
+                msg: CONFIG.TipConfig[error.response.data.code]
             }
         });
     } finally {

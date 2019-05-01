@@ -1,6 +1,9 @@
+import TipConfig from "./tip";
+
 const config = {
-    graphql: "localhost:3016/graphql",
-    api:     "localhost: 3016"
+    GRAPHQL: "http://localhost:3016/graphql",
+    API:     "http://localhost:3016",
+    TipConfig
 };
 
 export default config;
