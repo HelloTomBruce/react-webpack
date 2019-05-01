@@ -1,0 +1,9 @@
+query {
+    users {
+        id,
+        name,
+        sex,
+        intro,
+        skills
+    }
+}

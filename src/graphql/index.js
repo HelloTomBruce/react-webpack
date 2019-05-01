@@ -1,5 +1,5 @@
 import client from "../utils/graphql";
-import * as searchGql from "./search.graphql";
+import * as User from "./user.graphql";
 
-export const search = params =>
-    client.query({ query: searchGql, variables: params });
+export const getUserList = params =>
+    client.query({ query: User, variables: params });
