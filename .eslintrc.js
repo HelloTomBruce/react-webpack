@@ -18,7 +18,7 @@ module.exports = {
             { beforeColon: false, mode: "strict", align: "value" }
         ],
         "react/prop-types": 0,
-        "react/display-name": 2
+        "react/display-name": [0]
     },
     globals: {
         // configure global variables avoid no-undef error
