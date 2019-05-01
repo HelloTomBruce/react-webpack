@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getList } from "../redux/action/list";
-import "../component-less/list.less";
+import { getList } from "@/redux/action/list";
+import "./index.less";
 
 class List extends Component {
     componentDidMount() {

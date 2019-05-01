@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login, logout } from "../redux/action/login";
+import { login, logout } from "@/redux/action/login";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-import "../component-less/login.less";
+import "./index.less";
 
 const mapStateToProps = state => ({
     isLogin: state.login.isLogin,

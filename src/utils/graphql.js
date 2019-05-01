@@ -5,6 +5,7 @@ import { onError } from "apollo-link-error";
 import { ApolloLink, from } from "apollo-link";
 import store from "@/redux/store";
 import { showErrorTip } from "@/redux/action/error";
+import config from "@/config";
 
 const MiddleWare = new ApolloLink((operation, forward) => {
     // request时对请求进行处理
@@ -37,7 +38,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new createHttpLink({
-    uri: "http://127.0.0.1:3016/graphql" // 配置请求url
+    uri: config.graphql // 配置请求url
 });
 
 const cache = new InMemoryCache(); // 缓存

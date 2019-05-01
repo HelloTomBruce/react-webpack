@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Notice from "./notice";
-import collage from "../api/collage.js";
-import "../component-less/noticeBoard.less";
+import Notice from "./item";
+import collage from "./collage.js";
+import "./index.less";
 
 class NoticeBoard extends Component {
     constructor(props) {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
-import GraphqlExample from "@/component/graphql";
-import ErrorTip from "@/component/errorTip";
-import "./page-less/index.css";
+import AppLayout from "@/layout/app";
+import ErrorTip from "@/component/ErrorTip";
+import "@/style/reset.less";
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
         return (
             <div>
                 <ErrorTip />
-                <GraphqlExample />
+                <AppLayout />
             </div>
         );
     }

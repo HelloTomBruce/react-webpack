@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "../component-less/notice.less";
+import "./index.less";
 
 class Notice extends Component {
     constructor(props) {
