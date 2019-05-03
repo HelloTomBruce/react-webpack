@@ -1,5 +1,4 @@
 import { take, call, put, fork, cancel, cancelled } from "redux-saga/effects";
-import axios from "axios";
 import {
     LOGIN_REQUEST,
     LOGOUT,
@@ -8,29 +7,28 @@ import {
 } from "../action-type/login";
 import { SHOW_ERROR_TIP } from "../action-type/error";
 import CONFIG from "@/config";
-
-axios.defaults.headers.post["Content-Type"] =
-    "application/x-www-form-urlencoded";
+import Storage from "@/utils/localStorage";
+import request from "@/utils/request";
 
 const login = name => {
-    let url = `${CONFIG.API}/index/login`;
-    return axios.post(url, { name });
+    let url = CONFIG.API.login;
+    return request.post(url, { name });
 };
 
 const setToken = token => {
-    window.localStorage.setItem("token", token);
+    Storage.setItem("token", token);
 };
 
 const clearToken = () => {
-    window.localStorage.removeItem("token");
+    Storage.removeItem("token");
 };
 
 function* watchLogin() {
     while (true) {
         const {
-            payload: { name }
+            payload: { name, cbk }
         } = yield take(LOGIN_REQUEST);
-        const task = yield fork(authorize, name);
+        const task = yield fork(authorize, name, cbk);
         const action = yield take([LOGOUT, LOGIN_ERROR]);
         if (action.type === LOGOUT) {
             yield cancel(task);
@@ -39,7 +37,7 @@ function* watchLogin() {
     }
 }
 
-function* authorize(name) {
+function* authorize(name, cbk) {
     try {
         const {
             data: { token }
@@ -51,6 +49,7 @@ function* authorize(name) {
             }
         });
         yield call(setToken, token);
+        cbk();
         return token;
     } catch (error) {
         yield put({

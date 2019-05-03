@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { login } from "@/redux/action/login";
 import { Form, Icon, Input, Button } from "antd";
 import "./index.less";
@@ -9,8 +9,8 @@ const mapStateToProps = () => ({});
 
 const mapActionToProps = dispatch => {
     return {
-        login: ({ name }) => {
-            dispatch(login(name));
+        login: ({ name }, cbk) => {
+            dispatch(login(name, cbk));
         }
     };
 };
@@ -24,7 +24,9 @@ class LoginForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.login(values);
+                this.props.login(values, () => {
+                    this.props.history.replace("/");
+                });
             }
         });
     };
@@ -71,7 +73,9 @@ class LoginForm extends Component {
 
 const WrapperLoginForm = Form.create({ name: "login" })(LoginForm);
 
-export default connect(
-    mapStateToProps,
-    mapActionToProps
-)(WrapperLoginForm);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapActionToProps
+    )(WrapperLoginForm)
+);

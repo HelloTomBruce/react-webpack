@@ -8,12 +8,6 @@ import { showErrorTip } from "@/redux/action/error";
 import CONFIG from "@/config";
 
 const MiddleWare = new ApolloLink((operation, forward) => {
-    // request时对请求进行处理
-    operation.setContext({
-        headers: {
-            authorization: localStorage.getItem("token") || null
-        }
-    });
     return forward(operation);
 });
 
@@ -38,7 +32,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const httpLink = new createHttpLink({
-    uri: CONFIG.GRAPHQL // 配置请求url
+    uri:         CONFIG.GRAPHQL, // 配置请求url
+    credentials: "include"
 });
 
 const cache = new InMemoryCache(); // 缓存
