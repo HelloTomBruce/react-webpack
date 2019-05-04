@@ -28,7 +28,12 @@ const cssLoader = options => {
 const MiniCssExtractPluginLoader = options => {
     return {
         loader:  MiniCssExtractPlugin.loader,
-        options: options
+        options: Object.assign(
+            {
+                publicPath: "../../"
+            },
+            options
+        )
     };
 };
 
@@ -82,13 +87,13 @@ module.exports = {
                     {
                         loader:  "url-loader",
                         options: {
-                            limit:  8192,
-                            output: "assets/img",
+                            limit:      8192,
+                            outputPath: "assets/img",
                             name() {
                                 if (devMode) {
-                                    return "assets/img/[name].[ext]";
+                                    return "[name].[ext]";
                                 }
-                                return "assets/img/[hash].[ext]";
+                                return "[hash].[ext]";
                             }
                         }
                     }
