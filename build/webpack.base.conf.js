@@ -28,19 +28,14 @@ const cssLoader = options => {
 const MiniCssExtractPluginLoader = options => {
     return {
         loader:  MiniCssExtractPlugin.loader,
-        options: Object.assign(
-            {
-                publicPath: path.resolve(__dirname, "/src/page/less")
-            },
-            options
-        )
+        options: options
     };
 };
 
 module.exports = {
     entry:  ["./src/index.js"],
     output: {
-        filename: "[name].[hash].js",
+        filename: "assets/js/[name].[hash].js",
         path:     path.join(__dirname, "../dist")
     },
     module: {
@@ -80,6 +75,24 @@ module.exports = {
                 test:    /\.(graphql|gql)$/,
                 exclude: /node_modules/,
                 use:     [{ loader: "graphql-tag/loader" }]
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                use:  [
+                    {
+                        loader:  "url-loader",
+                        options: {
+                            limit:  8192,
+                            output: "assets/img",
+                            name() {
+                                if (devMode) {
+                                    return "assets/img/[name].[ext]";
+                                }
+                                return "assets/img/[hash].[ext]";
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -96,14 +109,18 @@ module.exports = {
             inject:   false
         }),
         new MiniCssExtractPlugin({
-            filename:      devMode ? "[name].css" : "[name].[hash].css",
-            chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
+            filename: devMode
+                ? "assets/css/[name].css"
+                : "assets/css/[name].[hash].css",
+            chunkFilename: devMode
+                ? "assets/css/[id].css"
+                : "assets/css/[id].[hash].css"
         }),
         new webpack.DllReferencePlugin({
-            manifest: require("../dist/react.manifest.json")
+            manifest: require("../dist/assets/dll/react.manifest.json")
         }),
         new HtmlIncludeAssetsPlugin({
-            assets: ["react.dll.js"],
+            assets: ["assets/dll/react.dll.js"],
             append: false
         })
     ]
