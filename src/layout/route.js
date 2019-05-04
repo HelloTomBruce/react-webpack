@@ -14,6 +14,10 @@ const Logout = Loadable({
     loader:  () => import("@/page/logout"),
     loading: Load
 });
+const User = Loadable({
+    loader:  () => import("@/page/user"),
+    loading: Load
+});
 
 const AppRoute = [
     {
@@ -33,6 +37,12 @@ const AppRoute = [
         component: Logout,
         exact:     true,
         title:     "Logout"
+    },
+    {
+        path:      "/user/:id",
+        component: User,
+        exact:     false,
+        title:     "User"
     }
 ];
 

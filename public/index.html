@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <% for (var name in htmlWebpackPlugin.files.css) { %>
-            <link type="text/css" rel="stylesheet" href="/<%=htmlWebpackPlugin.files.css[name]%>"/>
+            <link type="text/css" rel="stylesheet" href="<%=htmlWebpackPlugin.files.css[name]%>"/>
         <% } %>
         <title>react-webpack</title>
         <script type="text/javascript" src="https://at.alicdn.com/t/font_519743_7l0qfl2ru3c.js"></script>
@@ -13,6 +13,6 @@
         <div id='dialog-root'></div>
     </body>
     <% for (var name in htmlWebpackPlugin.files.js) { %>
-        <script type="text/javascript" src="/<%=htmlWebpackPlugin.files.js[name]%>"></script>
+        <script type="text/javascript" src="<%=htmlWebpackPlugin.files.js[name]%>"></script>
     <% } %>
 </html>

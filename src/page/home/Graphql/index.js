@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getUserList } from "@/graphql";
 import { Table, Tag } from "antd";
 import { showErrorTip } from "@/redux/action/error";
@@ -18,7 +19,14 @@ const columns = [
     {
         title:     "Name",
         dataIndex: "name",
-        key:       "name"
+        key:       "name",
+        render:    (name, record) => {
+            return (
+                <span>
+                    <Link to={`/user/${record.id}`}>{name}</Link>
+                </span>
+            );
+        }
     },
     {
         title:     "Sex",

@@ -40,8 +40,9 @@ const MiniCssExtractPluginLoader = options => {
 module.exports = {
     entry:  ["./src/index.js"],
     output: {
-        filename: "assets/js/[name].[hash].js",
-        path:     path.join(__dirname, "../dist")
+        filename:   "assets/js/[name].[hash].js",
+        path:       path.join(__dirname, "../dist"),
+        publicPath: "/"
     },
     module: {
         rules: [
