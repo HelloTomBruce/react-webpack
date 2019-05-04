@@ -5,6 +5,7 @@ import { onError } from "apollo-link-error";
 import { ApolloLink, from } from "apollo-link";
 import store from "@/redux/store";
 import { showErrorTip } from "@/redux/action/error";
+import { logout } from "@/redux/action/login";
 import CONFIG from "@/config";
 
 const MiddleWare = new ApolloLink((operation, forward) => {
@@ -20,15 +21,31 @@ const AfterWare = new ApolloLink((operation, forward) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
-        graphQLErrors.map(({ message, locations, path }) =>
+        graphQLErrors.map(({ message, locations, path }) => {
             store.dispatch(
                 showErrorTip(
                     `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
                 )
-            )
-        );
-    if (networkError)
-        store.dispatch(showErrorTip(`[Network error]: ${networkError}`));
+            );
+        });
+    if (networkError) {
+        if (networkError.statusCode) {
+            switch (networkError.statusCode) {
+                case 403:
+                    window.location.replace("/login");
+                    store.dispatch(logout());
+                    store.dispatch(
+                        showErrorTip(CONFIG.TipConfig[networkError.result.code])
+                    );
+                    break;
+                default:
+                    store.dispatch(showErrorTip(networkError.result.message));
+                    break;
+            }
+        } else {
+            store.dispatch(showErrorTip(`[Network error]: ${networkError}`));
+        }
+    }
 });
 
 const httpLink = new createHttpLink({

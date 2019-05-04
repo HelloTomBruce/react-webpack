@@ -16,7 +16,7 @@ const mapDispatchToMethods = dispatch => {
     };
 };
 
-class ErrorTip extends React.Component {
+class ErrorTip extends React.PureComponent {
     constructor(props) {
         super(props);
     }
@@ -25,11 +25,11 @@ class ErrorTip extends React.Component {
             message.warn(this.props.message);
             setTimeout(() => {
                 this.props.closeErrorTip();
-            });
+            }, 2000);
         }
     }
     render() {
-        return null;
+        return <div />;
     }
 }
 

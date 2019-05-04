@@ -1,4 +1,8 @@
 import axios from "axios";
+import store from "@/redux/store";
+import { showErrorTip } from "@/redux/action/error";
+import { logout } from "@/redux/action/login";
+import CONFIG from "@/config";
 
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
@@ -22,6 +26,10 @@ axios.interceptors.response.use(
             switch (error.response.status) {
                 case 403:
                     window.location.replace("/login");
+                    store.dispatch(logout());
+                    store.dispatch(
+                        showErrorTip(CONFIG.TipConfig[error.response.data.code])
+                    );
                     break;
                 default:
                     break;

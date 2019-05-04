@@ -4,13 +4,11 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     Redirect
 } from "react-router-dom";
-import Home from "@/page/home";
+import AppRoute from "./route";
 import NotFound from "@/page/404";
-import Login from "@/page/login";
-import Logout from "@/page/logout";
+import Nav from "./component/Nav";
 
 const mapStateToProps = ({ login }) => {
     return {
@@ -18,30 +16,22 @@ const mapStateToProps = ({ login }) => {
     };
 };
 
-function AppLayout(props) {
+function AppLayout() {
     return (
         <Router>
             <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        {!props.isLogin ? (
-                            <li>
-                                <Link to="/login">Login</Link>
-                            </li>
-                        ) : (
-                            <li>
-                                <Link to="/logout">Logout</Link>
-                            </li>
-                        )}
-                    </ul>
-                </nav>
+                <Nav />
                 <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/logout" exact component={Logout} />
+                    {AppRoute.map((route, index) => {
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                exact={route.exact}
+                                component={route.component}
+                            />
+                        );
+                    })}
                     <Route path="/404" exact component={NotFound} />
                     <Redirect to="/404" />
                 </Switch>

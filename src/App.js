@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { hot } from "react-hot-loader";
 import AppLayout from "@/layout/app";
 import ErrorTip from "@/component/ErrorTip";
-import "@/style/reset.less";
+import ErrorBoundary from "@/component/ErrorBoundary";
+import "@/style/index.less";
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class App extends Component {
         return (
             <div>
                 <ErrorTip />
-                <AppLayout />
+                <ErrorBoundary>
+                    <AppLayout />
+                </ErrorBoundary>
             </div>
         );
     }
