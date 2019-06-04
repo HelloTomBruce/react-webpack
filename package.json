@@ -43,6 +43,8 @@
     "raw-loader": "^1.0.0",
     "react-hot-loader": "^4.8.2",
     "style-loader": "^0.23.1",
+    "stylelint": "^10.0.1",
+    "stylelint-config-standard": "^18.3.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.3",
     "webpack-bundle-analyzer": "^3.1.0",
@@ -58,6 +60,7 @@
     "build-storybook": "build-storybook -c .storybook -o .out",
     "build-dll": "webpack --config ./build/webpack_dll.config.js --mode production",
     "eslint": "eslint src/**/*.js",
+    "stylelint": "stylelint src/**/*.less --fix",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -95,6 +98,9 @@
       "prettier --tab-width 4 --write",
       "eslint --fix",
       "git add"
+    ],
+    "*.less": [
+        "stylelint --fix"
     ]
   }
 }
