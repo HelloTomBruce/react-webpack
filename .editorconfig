@@ -1,7 +1,11 @@
 # http://editorconfig.org
 
+# 表明这是最顶层的配置文件，这样才会停止继续向上查找 .editorconfig 文件；
+# 查找的 .editorconfig 文件是从顶层开始读取的，类似变量作用域的效果，内部
+# 的 .editorconfig 文件属性优先级更高
 root = true
 
+# 指定作用文件格式
 [*]
 charset = utf-8
 end_of_line = lf
