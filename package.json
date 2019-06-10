@@ -71,6 +71,7 @@
     "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.14",
     "axios": "^0.18.0",
+    "formik": "^1.5.7",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
     "react": "^16.8.1",
@@ -100,7 +101,7 @@
       "git add"
     ],
     "*.less": [
-        "stylelint --fix"
+      "stylelint --fix"
     ]
   }
 }
