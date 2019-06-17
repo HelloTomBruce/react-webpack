@@ -1,45 +1,27 @@
 import React from "react";
-import { Record, List } from "immutable";
-import { Button } from "antd";
+import { List } from "immutable";
 
 class Example extends React.PureComponent {
     constructor(props) {
         super(props);
-        let originList = new Array(10000).fill(1).map((item, index) => {
-            return {
-                index:     index,
-                completed: false
-            };
-        });
         this.state = {
-            immutableData: Record({
-                immutableList: List(originList)
-            })(),
-            immutableTime:  "",
-            originListTime: ""
+            listOne: {}
         };
     }
-    changeImmutableList = () => {
-        let startTime = new Date().getTime();
-        this.setState(
-            ({ immutableData }) => {
-                return {
-                    immutableData: immutableData.setIn(["immutableList", 5000, "completed"], true)
-                };
-            },
-            () => {
-                let endTime = new Date().getTime();
-                this.setState({
-                    immutableTime: endTime - startTime
-                });
-            }
-        );
-    };
+    componentDidMount() {
+        let listOne = List.of(1, true, undefined, null, { a: 1 }, [1, 2, 3, 4]);
+        listOne = listOne.set(2, 3);
+
+        this.setState({
+            listOne: listOne.toObject()
+        });
+    }
     render() {
+        let { listOne } = this.state;
         return (
             <div>
-                <Button onClick={this.changeImmutableList}>改变第五千个数据的状态</Button>
-                <p>Immutable list消耗时间:{this.state.immutableTime}</p>
+                <h3>Immutable</h3>
+                <p>{JSON.stringify(listOne)}</p>
             </div>
         );
     }
