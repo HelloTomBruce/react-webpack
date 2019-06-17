@@ -15,7 +15,25 @@ const postCssLoader = {
 
 const lessLoader = {
     loader:  "less-loader",
-    options: { javascriptEnabled: true }
+    options: {
+        javascriptEnabled: true,
+        globalVars:        {},
+        modifyVars:        {
+            "primary-color":        "#5da381", // 全局主色
+            "link-color":           "#1890ff", // 链接色
+            "success-color":        "#52c41a", // 成功色
+            "warning-color":        "#faad14", // 警告色
+            "error-color":          "#f5222d", // 错误色
+            "font-size-base":       "14px", // 主字号
+            "heading-color":        "rgba(0, 0, 0, 0.85)", // 标题色
+            "text-color":           "rgba(0, 0, 0, 0.65)", // 主文本色
+            "text-color-secondary": "rgba(0, 0, 0, .45)", // 次文本色
+            "disabled-color":       "rgba(0, 0, 0, .25)", // 失效色
+            "border-radius-base":   "4px", // 组件/浮层圆角
+            "border-color-base":    "#d9d9d9", // 边框色
+            "box-shadow-base":      "0 2px 8px rgba(0, 0, 0, 0.15)" // 浮层阴影
+        }
+    }
 };
 
 const cssLoader = options => {
@@ -48,20 +66,11 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use:  [
-                    devMode ? "style-loader" : MiniCssExtractPluginLoader(),
-                    cssLoader({ importLoaders: 1 }),
-                    postCssLoader
-                ]
+                use:  [devMode ? "style-loader" : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 1 }), postCssLoader]
             },
             {
                 test: /\.less$/,
-                use:  [
-                    devMode ? "style-loader" : MiniCssExtractPluginLoader(),
-                    cssLoader({ importLoaders: 2 }),
-                    postCssLoader,
-                    lessLoader
-                ]
+                use:  [devMode ? "style-loader" : MiniCssExtractPluginLoader(), cssLoader({ importLoaders: 2 }), postCssLoader, lessLoader]
             },
             {
                 test: /\.js$/,
@@ -115,12 +124,8 @@ module.exports = {
             inject:   false
         }),
         new MiniCssExtractPlugin({
-            filename: devMode
-                ? "assets/css/[name].css"
-                : "assets/css/[name].[hash].css",
-            chunkFilename: devMode
-                ? "assets/css/[id].css"
-                : "assets/css/[id].[hash].css"
+            filename:      devMode ? "assets/css/[name].css" : "assets/css/[name].[hash].css",
+            chunkFilename: devMode ? "assets/css/[id].css" : "assets/css/[id].[hash].css"
         }),
         new webpack.DllReferencePlugin({
             manifest: require("../dist/assets/dll/react.manifest.json")
