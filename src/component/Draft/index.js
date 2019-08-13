@@ -1,9 +1,10 @@
 import React from "react";
 import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw } from "draft-js";
-import { Button } from "antd";
+import Immutable from "Immutable";
 import InlineStyleControls from "./InlineStyle";
 import BlockStyleControls from "./BlockStyle";
 import MediaControl from "./Media";
+import OperateBtn from "./OperateBtn";
 import ImageDisplay from "./Renderer/Image";
 import AudioDisplay from "./Renderer/Audio";
 import VideoDisplay from "./Renderer/Video";
@@ -12,8 +13,56 @@ import "./index.less";
 const STYLE_MAP = {
     COLOR: {
         color: "red"
+    },
+    SIZE: {
+        fontSize: "14px"
+    },
+    HEIGHT: {
+        lineHeight: "1"
+    },
+    ALIGN: {
+        textAlign: "left"
     }
 };
+
+const blockRenderMap = Immutable.Map({
+    "header-one": {
+        element: "div"
+    },
+    "header-two": {
+        element: "div"
+    },
+    "header-three": {
+        element: "div"
+    },
+    "header-four": {
+        element: "div"
+    },
+    "header-five": {
+        element: "div"
+    },
+    "header-six": {
+        element: "div"
+    },
+    blockquote: {
+        element: "blockquote"
+    },
+    "code-block": {
+        element: "pre"
+    },
+    atomic: {
+        element: "figure"
+    },
+    "unordered-list-item": {
+        element: "li"
+    },
+    "ordered-list-item": {
+        element: "li"
+    },
+    unstyled: {
+        element: "div"
+    }
+});
 
 class DraftEditor extends React.Component {
     constructor(props) {
@@ -27,9 +76,18 @@ class DraftEditor extends React.Component {
             editorState
         });
     };
-    toggleInlineStyle = (inlineStyle, color) => {
+    toggleInlineStyle = ({ inlineStyle, color, fontSize, lineHeight, textAlign }) => {
         if (typeof color !== "undefined") {
             STYLE_MAP.COLOR.color = color;
+        }
+        if (typeof fontSize !== "undefined") {
+            STYLE_MAP.SIZE.fontSize = fontSize;
+        }
+        if (typeof lineHeight !== "undefined") {
+            STYLE_MAP.HEIGHT.lineHeight = lineHeight;
+        }
+        if (typeof textAlign !== "undefined") {
+            STYLE_MAP.ALIGN.textAlign = textAlign;
         }
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle));
     };
@@ -138,6 +196,12 @@ class DraftEditor extends React.Component {
         const contentState = editorState.getCurrentContent();
         convertToRaw(contentState);
     };
+    undo = () => {
+        this.onChange(EditorState.undo(this.state.editorState));
+    };
+    redo = () => {
+        this.onChange(EditorState.redo(this.state.editorState));
+    };
     render() {
         let { editorState } = this.state;
         return (
@@ -146,10 +210,17 @@ class DraftEditor extends React.Component {
                     <InlineStyleControls editorState={editorState} onToggle={this.toggleInlineStyle} />
                     <BlockStyleControls editorState={editorState} onToggle={this.toggleBlockStyle} />
                     <MediaControl addImg={this.addImg} addAudio={this.addAudio} addVideo={this.addVideo} />
-                    <Button onClick={this.logRaw}>Log Raw</Button>
+                    <OperateBtn logRaw={this.logRaw} undo={this.undo} redo={this.redo} />
                 </div>
                 <div className="draft-editor-editor">
-                    <Editor editorState={editorState} customStyleMap={STYLE_MAP} onChange={this.onChange} blockRendererFn={this.blockRendererFn} blockStyleFn={this.getBlockStyle} />
+                    <Editor
+                        editorState={editorState}
+                        customStyleMap={STYLE_MAP}
+                        onChange={this.onChange}
+                        blockRendererFn={this.blockRendererFn}
+                        blockStyleFn={this.getBlockStyle}
+                        blockRenderMap={blockRenderMap}
+                    />
                 </div>
             </div>
         );

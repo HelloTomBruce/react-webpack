@@ -19,6 +19,9 @@ class BlockStyle extends React.Component {
     constructor(props) {
         super(props);
     }
+    handleChangeAlign = textAlign => {
+        this.props.onToggle(textAlign);
+    };
     render() {
         const { editorState } = this.props;
         const selection = editorState.getSelection();

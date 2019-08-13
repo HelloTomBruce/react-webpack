@@ -55,12 +55,20 @@
         margin: 16px 0 16px 25px;
         padding: 0;
         list-style: circle;
+
+        > div {
+          display: inline-block;
+        }
       }
 
       .editor-ol {
         margin: 16px 0 16px 25px;
         padding: 0;
         list-style: decimal;
+
+        > div {
+          display: inline-block;
+        }
       }
 
       .editor-code {
@@ -70,6 +78,18 @@
         line-height: 30px;
         background: #333;
         color: #fff;
+      }
+
+      .editor-left {
+        text-align: left;
+      }
+
+      .editor-right {
+        text-align: right;
+      }
+
+      .editor-center {
+        text-align: center;
       }
     }
   }

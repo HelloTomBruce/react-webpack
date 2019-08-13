@@ -6,7 +6,7 @@ class StyleButton extends React.Component {
     }
     onToggle = e => {
         e.preventDefault();
-        this.props.onToggle(this.props.style);
+        this.props.onToggle({ inlineStyle: this.props.style });
     };
     render() {
         let className = "inline-style-btn";
