@@ -1,6 +1,7 @@
 import React from "react";
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw } from "draft-js";
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, CompositeDecorator, convertToRaw, DefaultDraftBlockRenderMap } from "draft-js";
 import Immutable from "Immutable";
+import DraftJsUtils from "draftjs-utils";
 import InlineStyleControls from "./InlineStyle";
 import BlockStyleControls from "./BlockStyle";
 import MediaControl from "./Media";
@@ -8,7 +9,9 @@ import OperateBtn from "./OperateBtn";
 import ImageDisplay from "./Renderer/Image";
 import AudioDisplay from "./Renderer/Audio";
 import VideoDisplay from "./Renderer/Video";
+import LinkDisplay from "./Renderer/Link";
 import "./index.less";
+import "draft-js/dist/Draft.css";
 
 const STYLE_MAP = {
     COLOR: {
@@ -22,6 +25,9 @@ const STYLE_MAP = {
     },
     ALIGN: {
         textAlign: "left"
+    },
+    FONT: {
+        fontFamily: "Arial, Helvetica, sans-serif"
     }
 };
 
@@ -53,22 +59,39 @@ const blockRenderMap = Immutable.Map({
     atomic: {
         element: "figure"
     },
-    "unordered-list-item": {
-        element: "li"
-    },
-    "ordered-list-item": {
-        element: "li"
-    },
     unstyled: {
         element: "div"
     }
 });
 
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
+
+const getSelectionBlock = editorState => {
+    return editorState.getCurrentContent().getBlockForKey(editorState.getSelection().getAnchorKey());
+};
+
+const findLinkEntities = (contentBlock, callback, contentState) => {
+    contentBlock.findEntityRanges(
+        character => {
+            const entityKey = character.getEntity();
+            return entityKey !== null && contentState.getEntity(entityKey).getType() === "LINK";
+        },
+        function() {
+            callback(...arguments);
+        }
+    );
+};
 class DraftEditor extends React.Component {
     constructor(props) {
         super(props);
+        const decorator = new CompositeDecorator([
+            {
+                strategy:  findLinkEntities,
+                component: LinkDisplay
+            }
+        ]);
         this.state = {
-            editorState: EditorState.createEmpty()
+            editorState: EditorState.createEmpty(decorator)
         };
     }
     onChange = editorState => {
@@ -76,7 +99,7 @@ class DraftEditor extends React.Component {
             editorState
         });
     };
-    toggleInlineStyle = ({ inlineStyle, color, fontSize, lineHeight, textAlign }) => {
+    toggleInlineStyle = ({ inlineStyle, color, fontSize, lineHeight, textAlign, fontFamily }) => {
         if (typeof color !== "undefined") {
             STYLE_MAP.COLOR.color = color;
         }
@@ -86,13 +109,33 @@ class DraftEditor extends React.Component {
         if (typeof lineHeight !== "undefined") {
             STYLE_MAP.HEIGHT.lineHeight = lineHeight;
         }
+        if (typeof fontFamily !== "undefined") {
+            STYLE_MAP.FONT.fontFamily = fontFamily;
+        }
         if (typeof textAlign !== "undefined") {
             STYLE_MAP.ALIGN.textAlign = textAlign;
+            const { editorState } = this.state;
+            const currentBlock = getSelectionBlock(editorState);
+            let data = Object.assign({}, currentBlock.getData(), { textAlign });
+            this.onChange(DraftJsUtils.setBlockData(editorState, data));
+            return;
         }
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle));
     };
     toggleBlockStyle = blockStyle => {
         this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockStyle));
+    };
+    addLink = () => {
+        const { editorState } = this.state;
+        const contentState = editorState.getCurrentContent();
+        const contentStateWithEntity = contentState.createEntity("LINK", "SEGMENTED", {
+            url: "http://www.google.com"
+        });
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+        this.setState({
+            editorState: RichUtils.toggleLink(newEditorState, newEditorState.getSelection(), entityKey)
+        });
     };
     addImg = () => {
         const { editorState } = this.state;
@@ -137,12 +180,12 @@ class DraftEditor extends React.Component {
         let type = contentBlock.getType();
         const { editorState } = this.state;
         const contentState = editorState.getCurrentContent();
+        const entityKey = contentBlock.getEntityAt(0);
+        if (!entityKey) {
+            return null;
+        }
+        const entity = contentState.getEntity(entityKey);
         if (type === "atomic") {
-            const entityKey = contentBlock.getEntityAt(0);
-            if (!entityKey) {
-                return null;
-            }
-            const entity = contentState.getEntity(entityKey);
             const mediaType = entity.getType();
             if (mediaType === "IMAGE") {
                 result = {
@@ -162,33 +205,40 @@ class DraftEditor extends React.Component {
                     editable:  false
                 };
             }
+            if (mediaType === "LINK") {
+                result = {
+                    component: LinkDisplay,
+                    editable:  false
+                };
+            }
         }
         return result;
     };
     getBlockStyle = block => {
+        let textAlign = block.getData().get("textAlign");
         switch (block.getType()) {
             case "blockquote":
-                return "editor-blockquote";
+                return `editor-blockquote editor-${textAlign}`;
             case "header-one":
-                return "editor-h1";
+                return `editor-h1 editor-${textAlign}`;
             case "header-two":
-                return "editor-h2";
+                return `editor-h2 editor-${textAlign}`;
             case "header-three":
-                return "editor-h3";
+                return `editor-h3 editor-${textAlign}`;
             case "header-four":
-                return "editor-h4";
+                return `editor-h4 editor-${textAlign}`;
             case "header-five":
-                return "editor-h5";
+                return `editor-h5 editor-${textAlign}`;
             case "header-six":
-                return "editor-h6";
+                return `editor-h6 editor-${textAlign}`;
             case "unordered-list-item":
-                return "editor-ul";
+                return `editor-ul editor-${textAlign}`;
             case "ordered-list-item":
-                return "editor-ol";
+                return `editor-ol editor-${textAlign}`;
             case "code-block":
-                return "editor-code";
+                return `editor-code editor-${textAlign}`;
             default:
-                return null;
+                return textAlign ? `editor-${textAlign}` : null;
         }
     };
     logRaw = () => {
@@ -209,17 +259,19 @@ class DraftEditor extends React.Component {
                 <div className="draft-editor-control">
                     <InlineStyleControls editorState={editorState} onToggle={this.toggleInlineStyle} />
                     <BlockStyleControls editorState={editorState} onToggle={this.toggleBlockStyle} />
-                    <MediaControl addImg={this.addImg} addAudio={this.addAudio} addVideo={this.addVideo} />
+                    <MediaControl addImg={this.addImg} addAudio={this.addAudio} addVideo={this.addVideo} addLink={this.addLink} />
                     <OperateBtn logRaw={this.logRaw} undo={this.undo} redo={this.redo} />
                 </div>
                 <div className="draft-editor-editor">
                     <Editor
+                        placeholder="Tell me what are you doing about..."
                         editorState={editorState}
                         customStyleMap={STYLE_MAP}
                         onChange={this.onChange}
                         blockRendererFn={this.blockRendererFn}
                         blockStyleFn={this.getBlockStyle}
-                        blockRenderMap={blockRenderMap}
+                        blockRenderMap={extendedBlockRenderMap}
+                        spellCheck={true}
                     />
                 </div>
             </div>

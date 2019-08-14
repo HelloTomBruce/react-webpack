@@ -21,7 +21,7 @@ class Height extends React.Component {
         );
         return (
             <Dropdown overlay={LineHeightList}>
-                <a href="" className="line-height-link">
+                <a href="javascript:void(0)" className="line-height-link">
                     Height
                 </a>
             </Dropdown>

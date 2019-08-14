@@ -21,7 +21,7 @@ class Size extends React.Component {
         );
         return (
             <Dropdown overlay={FontSizeList}>
-                <a href="" className="font-size-link">
+                <a href="javascript:void(0)" className="font-size-link">
                     Size
                 </a>
             </Dropdown>

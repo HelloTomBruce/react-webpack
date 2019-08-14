@@ -14,7 +14,7 @@ class StyleButton extends React.Component {
             className += " active";
         }
         return (
-            <span className={className} type="link" onMouseDown={this.onToggle}>
+            <span className={className} onMouseDown={this.onToggle}>
                 {this.props.label}
             </span>
         );

@@ -9,6 +9,7 @@ class Media extends React.Component {
     render() {
         return (
             <div className="media-control">
+                <Button onClick={this.props.addLink}>Link</Button>
                 <Button onClick={this.props.addImg}>Image</Button>
                 <Button onClick={this.props.addAudio}>Audio</Button>
                 <Button onClick={this.props.addVideo}>Video</Button>

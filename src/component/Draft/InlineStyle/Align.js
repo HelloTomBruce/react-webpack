@@ -3,7 +3,7 @@ import { Dropdown } from "antd";
 
 const Align_LIST = ["center", "left", "right"];
 
-class Height extends React.Component {
+class Align extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -21,7 +21,7 @@ class Height extends React.Component {
         );
         return (
             <Dropdown overlay={AlignList}>
-                <a href="" className="text-align-link">
+                <a href="javascript:void(0)" className="text-align-link">
                     Align
                 </a>
             </Dropdown>
@@ -29,4 +29,4 @@ class Height extends React.Component {
     }
 }
 
-export default Height;
+export default Align;
