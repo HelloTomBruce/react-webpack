@@ -44,6 +44,8 @@
     "raw-loader": "^1.0.0",
     "react-color": "^2.17.3",
     "react-hot-loader": "^4.8.2",
+    "react-spring": "^8.0.27",
+    "react-use-gesture": "^5.2.4",
     "style-loader": "^0.23.1",
     "stylelint": "^10.0.1",
     "stylelint-config-standard": "^18.3.0",
