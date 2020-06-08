@@ -1,11 +1,10 @@
 import axios from "axios";
-import store from "@/redux/store";
+import store from "@/redux/store/rematch";
 import { showErrorTip } from "@/redux/action/error";
 import { logout } from "@/redux/action/login";
 import CONFIG from "@/config";
 
-axios.defaults.headers.post["Content-Type"] =
-    "application/x-www-form-urlencoded";
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true;
 
@@ -27,9 +26,7 @@ axios.interceptors.response.use(
                 case 403:
                     window.location.replace("/login");
                     store.dispatch(logout());
-                    store.dispatch(
-                        showErrorTip(CONFIG.TipConfig[error.response.data.code])
-                    );
+                    store.dispatch(showErrorTip(CONFIG.TipConfig[error.response.data.code]));
                     break;
                 default:
                     break;

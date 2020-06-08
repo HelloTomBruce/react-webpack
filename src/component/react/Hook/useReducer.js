@@ -25,21 +25,9 @@ function Counter() {
     const [state, dispatch] = useReducer(countReducer, { count: 1 }, initState);
     return (
         <div>
-            <button
-                onClick={() =>
-                    dispatch({ type: "increment", payload: { count: 2 } })
-                }
-            >
-                add
-            </button>
+            <button onClick={() => dispatch({ type: "increment", payload: { count: 2 } })}>add</button>
             {state.count}
-            <button
-                onClick={() =>
-                    dispatch({ type: "decrement", payload: { count: 2 } })
-                }
-            >
-                dec
-            </button>
+            <button onClick={() => dispatch({ type: "decrement", payload: { count: 2 } })}>dec</button>
         </div>
     );
 }

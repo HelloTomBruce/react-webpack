@@ -13,10 +13,7 @@ class ErrorBoundary extends React.Component {
         return { hasError: true };
     }
     componentDidCatch(err, info) {
-        message.warn(
-            typeof err === "string" ? err : JSON.stringify(err),
-            typeof info === "string" ? info : JSON.stringify(info)
-        );
+        message.warn(typeof err === "string" ? err : JSON.stringify(err), typeof info === "string" ? info : JSON.stringify(info));
     }
     render() {
         if (this.state.hasError) {

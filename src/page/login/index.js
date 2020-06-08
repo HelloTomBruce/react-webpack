@@ -43,24 +43,10 @@ class LoginForm extends Component {
                                 message:  "Please input your username!"
                             }
                         ]
-                    })(
-                        <Input
-                            prefix={
-                                <Icon
-                                    type="user"
-                                    style={{ color: "rgba(0,0,0,.25)" }}
-                                />
-                            }
-                            placeholder="Username"
-                        />
-                    )}
+                    })(<Input prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />} placeholder="Username" />)}
                 </Form.Item>
                 <Form.Item>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button"
-                    >
+                    <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
                     Or

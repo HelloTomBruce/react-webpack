@@ -80,11 +80,7 @@ class GraphqlExample extends React.Component {
         return (
             <div>
                 <h3>User List</h3>
-                <Table
-                    columns={columns}
-                    dataSource={this.state.list}
-                    rowKey="id"
-                />
+                <Table columns={columns} dataSource={this.state.list} rowKey="id" />
             </div>
         );
     }

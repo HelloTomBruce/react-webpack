@@ -1,10 +1,6 @@
 module.exports = {
     parser: "babel-eslint",
-    extends: [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:promise/recommended"
-    ],
+    extends: ["eslint:recommended", "plugin:react/recommended", "plugin:promise/recommended"],
     plugins: ["standard", "react", "promise", "json"],
     env: {
         browser: true,
@@ -13,10 +9,7 @@ module.exports = {
     },
     rules: {
         "space-before-function-paren": 0,
-        "key-spacing": [
-            2,
-            { beforeColon: false, mode: "strict", align: "value" }
-        ],
+        "key-spacing": [2, { beforeColon: false, mode: "strict", align: "value" }],
         "react/prop-types": 0,
         "react/display-name": [0],
         "promise/always-return": 0

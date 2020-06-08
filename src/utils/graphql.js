@@ -3,7 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink, from } from "apollo-link";
-import store from "@/redux/store";
+import store from "@/redux/store/rematch";
 import { showErrorTip } from "@/redux/action/error";
 import { logout } from "@/redux/action/login";
 import CONFIG from "@/config";
@@ -22,11 +22,7 @@ const AfterWare = new ApolloLink((operation, forward) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
         graphQLErrors.map(({ message, locations, path }) => {
-            store.dispatch(
-                showErrorTip(
-                    `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-                )
-            );
+            store.dispatch(showErrorTip(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`));
         });
     if (networkError) {
         if (networkError.statusCode) {
@@ -34,9 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
                 case 403:
                     window.location.replace("/login");
                     store.dispatch(logout());
-                    store.dispatch(
-                        showErrorTip(CONFIG.TipConfig[networkError.result.code])
-                    );
+                    store.dispatch(showErrorTip(CONFIG.TipConfig[networkError.result.code]));
                     break;
                 default:
                     store.dispatch(showErrorTip(networkError.result.message));

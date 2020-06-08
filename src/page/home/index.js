@@ -10,7 +10,9 @@ const mapStateToProps = ({ login }) => {
 };
 
 class Index extends Component {
-    componentDidMount() {}
+    componentDidMount() {
+        console.log(1212, this.props);
+    }
     render() {
         return (
             <div className="homePage">
