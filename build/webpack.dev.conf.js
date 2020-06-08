@@ -6,6 +6,9 @@ require("dotenv").config()
 module.exports = merge(baseConfig, {
   mode:      "development",
   devtool:   "cheap-module-source-map",
+  output:    {
+    publicPath: "/"
+  },
   devServer: {
     contentBase: "./dist",
     compress:    true,

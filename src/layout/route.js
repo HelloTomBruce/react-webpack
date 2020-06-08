@@ -18,6 +18,10 @@ const User = Loadable({
     loader:  () => import("@/page/user"),
     loading: Load
 });
+const Formily = Loadable({
+    loader:  () => import("@/page/formily"),
+    loading: Load
+})
 
 const AppRoute = [
     {
@@ -43,6 +47,12 @@ const AppRoute = [
         component: User,
         exact:     false,
         title:     "User"
+    },
+    {
+        path:      "/formily",
+        component: Formily,
+        exact:     false,
+        title:     "Formily"
     }
 ];
 

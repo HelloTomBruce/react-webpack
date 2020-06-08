@@ -5,6 +5,7 @@ import AppLayout from "@/layout/app";
 import ErrorTip from "@/component/ErrorTip";
 import ErrorBoundary from "@/component/ErrorBoundary";
 import "@/style/index.less";
+import 'antd/dist/antd.css';
 
 class App extends Component {
     constructor(props) {
