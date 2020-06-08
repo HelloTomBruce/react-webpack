@@ -1,9 +1,9 @@
 const path = require("path");
-const webpack = require("webpack");
+// const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
+// const HtmlIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
 const devMode = process.env.NODE_ENV !== "production";
 
 const postCssLoader = {
@@ -126,13 +126,13 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename:      devMode ? "assets/css/[name].css" : "assets/css/[name].[hash].css",
             chunkFilename: devMode ? "assets/css/[id].css" : "assets/css/[id].[hash].css"
-        }),
-        new webpack.DllReferencePlugin({
-            manifest: require("../dist/assets/dll/react.manifest.json")
-        }),
-        new HtmlIncludeAssetsPlugin({
-            assets: ["assets/dll/react.dll.js"],
-            append: false
         })
+        // new webpack.DllReferencePlugin({
+        //     manifest: require("../dist/assets/dll/react.manifest.json")
+        // }),
+        // new HtmlIncludeAssetsPlugin({
+        //     assets: ["assets/dll/react.dll.js"],
+        //     append: false
+        // })
     ]
 };
